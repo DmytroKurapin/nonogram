@@ -15,8 +15,12 @@ const testTxt = ref('')
 
 onMounted(async () => {
   testTxt.value = svgRef.value
-  const newSvg = svgParsing(testTxt.value.querySelector('svg'))
-  emit('ready', newSvg)
+  try {
+    const newSvg = svgParsing(testTxt.value.querySelector('svg'))
+    emit('ready', newSvg)
+  } catch (e) {
+    console.error(e)
+  }
 })
 </script>
 

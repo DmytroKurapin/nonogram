@@ -4,6 +4,7 @@ export default (sortedList, mainAxis) => {
   const [secAxis, mainDimension, secDimension] = mainAxis === 'x' ?  ['y', 'width', 'height'] : ['x', 'height', 'width']
   let prevMainAxis = null
   let prevSecAxis = null
+  let highestNum = 1 // the largest list of numbers inside one row/column
   const counter = sortedList.reduce((prev, curr) => {
     const secAxisStr = curr.attributes[secAxis].value
     const mainAxisNum = Number(curr.attributes[mainAxis].value)
@@ -15,6 +16,8 @@ export default (sortedList, mainAxis) => {
       }
       else {
         prev[secAxisStr].unshift(1)
+        const leng = prev[secAxisStr].length
+        highestNum = leng > highestNum ? leng : highestNum
       }
       prevMainAxis = mainAxisNum
     } else {
@@ -31,5 +34,6 @@ export default (sortedList, mainAxis) => {
     return prev
   }, {})
   counter['res'] = Object.values(counter)
+  counter['highest'] = highestNum
   return counter
 }

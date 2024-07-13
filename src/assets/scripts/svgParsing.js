@@ -1,16 +1,23 @@
 import getCounters from './drawingCounters.js'
 import getCluesContainer from './cluesContainer.js'
+import updateLayer from "./layerContainer.js";
 
 const parsing = svgEl => {
-  const list = svgEl.querySelector('#Mosaic').querySelectorAll('rect');
+  const list = svgEl.querySelector('#Mosaic').querySelectorAll('rect')
   const numTopGroup = svgEl.querySelector('#Numbers_Vertical')
   const numLeftGroup = svgEl.querySelector('#Numbers_Horizontal')
   const nodesList = [...list]
   const horCounters = horizontalSorting(nodesList)
   const verCounters = verticalSorting(nodesList)
 
-  numTopGroup.innerHTML = getCluesContainer(numTopGroup, verCounters.res, 'y').innerHTML
-  numLeftGroup.innerHTML = getCluesContainer(numLeftGroup, horCounters.res, 'x').innerHTML
+  const { el: containerElemY, cellHeight} = getCluesContainer(numTopGroup, verCounters.res, 'y')
+  const { el: containerElemX, cellWidth} = getCluesContainer(numLeftGroup, horCounters.res, 'x')
+
+  updateLayer(svgEl, cellHeight, (horCounters.highest - 1), cellWidth, (verCounters.highest - 1))
+
+  numTopGroup.innerHTML = containerElemY.innerHTML
+  numLeftGroup.innerHTML = containerElemX.innerHTML
+
   return svgEl
 }
 
