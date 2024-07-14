@@ -27,16 +27,11 @@ const openFile = ({ target }) => {
       }
       else {
         // proceed the other image types
-        // eslint-disable-next-line
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~')
-        // eslint-disable-next-line
-        console.log('incorrect image type - ', extension)
-        // eslint-disable-next-line
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~')
+        console.error('incorrect image type - ', extension)
       }
     }
     else {
-      console.log('Wrong image type - ', extension)
+      console.error('Wrong image type - ', extension)
     }
   }
 }

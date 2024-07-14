@@ -1,12 +1,6 @@
 
 
 const test = async (blackEl) => {
-  // eslint-disable-next-line
-  console.log('~~~~~~~~~~~~~~~~~~~~~~~~')
-  // eslint-disable-next-line
-  console.log(blackEl)
-  // eslint-disable-next-line
-  console.log('~~~~~~~~~~~~~~~~~~~~~~~~')
   await Promise.all([
     (async () => console.log(await test1()))(),
     (async () => console.log(await test2()))(),
