@@ -10,7 +10,7 @@ export default (sortedList, mainAxis) => {
     const mainAxisNum = Number(curr.attributes[mainAxis].value)
     if (prev.hasOwnProperty(secAxisStr)) {
       const mainDimensionNum = parseFloatNums(curr.attributes[mainDimension].value)
-      const mainAxisDiff = parseFloatNums(mainAxisNum - prevMainAxis)
+      const mainAxisDiff = parseFloatNums(mainAxisNum - (prevMainAxis === null ? 0 : prevMainAxis))
       if (Math.abs(mainAxisDiff - mainDimensionNum) < 0.02) {
         prev[secAxisStr][0]++
       }
@@ -22,9 +22,9 @@ export default (sortedList, mainAxis) => {
       prevMainAxis = mainAxisNum
     } else {
       const secDimensionNum = parseFloatNums(curr.attributes[secDimension].value)
-      const nextSecDimension = parseFloatNums(secDimensionNum + prevSecAxis)
-
-      if (prevSecAxis !== null && Math.abs(nextSecDimension - Number(secAxisStr)) > 0.02) {
+      const nextSecDimension = parseFloatNums(secDimensionNum + (prevSecAxis === null ? 0 : prevSecAxis))
+      // check if there is a big gap between numbers - means empty row
+      if (Math.abs(nextSecDimension - Number(secAxisStr)) > 0.02) {
         prev[nextSecDimension] = []
       }
       prev[secAxisStr] = [1]
