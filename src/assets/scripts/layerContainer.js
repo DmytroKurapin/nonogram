@@ -21,8 +21,8 @@ export default (svgEl, cellHeight, xMultiplier, cellWidth, yMultiplier) => {
   const horLinesCont = gridCont.querySelector('#Horizontal_Lines')
   const verLinesCont = gridCont.querySelector('#Vertical_Lines')
 
-  const cloneHorLine = horLinesCont.querySelector('[data-name="Thin Lines"]').querySelector('line').cloneNode(true)
-  const cloneVerLine = verLinesCont.querySelector('[data-name="Thin Lines"]').querySelector('line').cloneNode(true)
+  const cloneHorLine = horLinesCont.querySelector('[id*="Thin_Lines"]').querySelector('line').cloneNode(true)
+  const cloneVerLine = verLinesCont.querySelector('[id*="Thin_Lines"]').querySelector('line').cloneNode(true)
 
   extendLines(horLinesCont, newX, 'x')
   extendLines(verLinesCont, newY, 'y')
